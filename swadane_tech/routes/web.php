@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\RegistrationController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[RegistrationController::class,'form'])->name('form');
+Route::post('form-data',[RegistrationController::class,'form_data'])->name('form_data');
