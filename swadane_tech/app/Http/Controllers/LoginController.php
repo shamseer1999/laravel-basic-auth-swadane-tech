@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\otpVerify;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class LoginController extends Controller
 {
@@ -34,6 +36,12 @@ class LoginController extends Controller
             $user=User::where('email',$credential['email'])->first();
             $user->email_otp=$otp;
             $user->save();
+
+            $details=array(
+                'title'=>'This is the OTP varification email',
+                'body' =>'Please verify your email using this otp '.$otp.' and explore'
+            );
+            Mail::to(auth()->user()->email)->send(new otpVerify($details));
 
             return redirect()->route('email_varification')->with('success','Verify your email using otp');
         }
