@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\LoginController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[RegistrationController::class,'form'])->name('form');
 Route::post('form-data',[RegistrationController::class,'form_data'])->name('form_data');
+
+Route::get('login',[LoginController::class,'login'])->name('login');
+Route::post('login-data',[LoginController::class,'login_data'])->name('login_data');
+
+Route::match(['GET','POST'],'verify-email',[LoginController::class,'email_varification'])->name('email_varification');

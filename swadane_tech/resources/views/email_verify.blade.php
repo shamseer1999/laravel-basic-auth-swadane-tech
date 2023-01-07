@@ -10,7 +10,7 @@
     <meta name="keywords" content="Colorlib Templates">
 
     <!-- Title Page-->
-    <title>Swadane | Registration</title>
+    <title>Swadane | Verify Email</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
@@ -34,7 +34,9 @@
         <div class="wrapper wrapper--w680">
             <div class="card card-4">
                 <div class="card-body">
-                    <h2 class="title">Registration Form</h2>
+                    <h2 class="title text-center">Verify Your Email</h2>
+                    <hr class="bg-gra-02"><br>
+                    {{-- <center><hr width="50%"></center><br> --}}
                     @if (session()->has('success'))
                         <div class="alert alert-success alert-dismissable">
 
@@ -53,61 +55,16 @@
                 
                         </div>
                     @endif
-                    @if ($errors->any())
-                        @foreach ($errors->all() as $error)
-                            <div class="alert alert-danger alert-dismissable">
-        
-                                {{ $error }}
-                    
-                            </div>
-                        @endforeach
-                    @endif
-                    <form method="POST" action="{{route('form_data')}}">
+                    <form method="POST" action="">
                         @csrf
                         <div class="row row-space">
-                            <div class="col-2">
                                 <div class="input-group">
-                                    <label class="label">first name</label>
-                                    <input class="input--style-4" type="text" name="first_name" required>
+                                    <label class="label">Otp</label>
+                                    <input class="input--style-4" type="text" name="otp">
                                 </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label">last name</label>
-                                    <input class="input--style-4"  type="text" name="last_name" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label">Email</label>
-                                    <input class="input--style-4" type="email" name="email" required>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label">Phone Number</label>
-                                    <input class="input--style-4" type="text" name="phone" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label">Password</label>
-                                    <input class="input--style-4" type="password" name="pswd" required>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label">Confirm Password</label>
-                                    <input class="input--style-4" type="password" name="cpswd" required>
-                                </div>
-                            </div>
                         </div>
                         <div class="p-t-15">
-                            <center><button class="btn btn--radius-2 btn--blue" type="submit">Register</button></center>
+                            <center><button class="btn btn--radius-2 btn--blue" type="submit">Verify</button></center>
                         </div>
                     </form>
                 </div>
