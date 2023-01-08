@@ -14,7 +14,22 @@ class LoginController extends Controller
     {
         if($request->isMethod('post'))
         {
-            return 1;
+            $user_id=decrypt(request('user_id'));
+            $otp=request('otp');
+
+            $check=User::where(['id'=>$user_id,'email_otp'=>$otp])->first();
+            $time=time();
+            $valid_time=round(($time-$check['otp_timeout'])/60);
+            
+            
+            if($valid_time<10.0)
+            {
+                $check->email_verified_at=date("Y-m-d H:i:s");
+                $check->save();
+                return redirect()->route("dashbord");
+            }else{
+                return redirect()->route('login')->with("danger","Your otp has expierd");
+            }
         }
         return view('email_verify');
     }
@@ -32,9 +47,14 @@ class LoginController extends Controller
 
         if(auth()->attempt($credential))
         {
-            $otp=rand(1000,9999);
+            if(auth()->user()->email_verified_at !="")
+            {
+                return redirect()->route("dashbord");
+            }else{
+                $otp=rand(1000,9999);
             $user=User::where('email',$credential['email'])->first();
             $user->email_otp=$otp;
+            $user->otp_timeout=time();
             $user->save();
 
             $details=array(
@@ -43,7 +63,9 @@ class LoginController extends Controller
             );
             Mail::to(auth()->user()->email)->send(new otpVerify($details));
 
-            return redirect()->route('email_varification')->with('success','Verify your email using otp');
+            return redirect()->route('email_varification')->with('success','Verify your email using otp.Please find out it from your email');
+            }
+            
         }
         else
         {

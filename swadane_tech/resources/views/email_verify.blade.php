@@ -61,6 +61,7 @@
                                 <div class="input-group">
                                     <label class="label">Otp</label>
                                     <input class="input--style-4" type="text" name="otp">
+                                    <input type="hidden" name="user_id" value="{{encrypt(auth()->user()->id)}}">
                                 </div>
                         </div>
                         <div class="p-t-15">

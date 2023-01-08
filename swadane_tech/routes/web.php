@@ -23,3 +23,7 @@ Route::get('login',[LoginController::class,'login'])->name('login');
 Route::post('login-data',[LoginController::class,'login_data'])->name('login_data');
 
 Route::match(['GET','POST'],'verify-email',[LoginController::class,'email_varification'])->name('email_varification');
+
+Route::get("/dashbord",function(){
+    dd("welcome to the dashbord");
+})->name("dashbord");
